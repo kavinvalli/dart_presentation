@@ -1,0 +1,471 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<title>Dart Notes</title>
+<meta name="author" content="(Kavin Desi Valli)"/>
+<style type="text/css">
+.underline { text-decoration: underline; }
+</style>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js/dist/reveal.css"/>
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js/dist/theme/moon.css" id="theme"/>
+
+
+<!-- If the query includes 'print-pdf', include the PDF print sheet -->
+<script>
+    if( window.location.search.match( /print-pdf/gi ) ) {
+        var link = document.createElement( 'link' );
+        link.rel = 'stylesheet';
+        link.type = 'text/css';
+        link.href = 'https://cdn.jsdelivr.net/npm/reveal.js/css/print/pdf.css';
+        document.getElementsByTagName( 'head' )[0].appendChild( link );
+    }
+</script>
+
+        <style>
+        /* From: https://endlessparentheses.com/public/css/endless.css */
+        /* See also: https://meta.superuser.com/questions/4788/css-for-the-new-kbd-style */
+        kbd
+        {
+          -moz-border-radius: 6px;
+          -moz-box-shadow: 0 1px 0 rgba(0,0,0,0.2),0 0 0 2px #fff inset;
+          -webkit-border-radius: 6px;
+          -webkit-box-shadow: 0 1px 0 rgba(0,0,0,0.2),0 0 0 2px #fff inset;
+          background-color: #f7f7f7;
+          border: 1px solid #ccc;
+          border-radius: 6px;
+          box-shadow: 0 1px 0 rgba(0,0,0,0.2),0 0 0 2px #fff inset;
+          color: #333;
+          display: inline-block;
+          font-family: 'Droid Sans Mono', monospace;
+          font-size: 80%;
+          font-weight: normal;
+          line-height: inherit;
+          margin: 0 .1em;
+          padding: .08em .4em;
+          text-shadow: 0 1px 0 #fff;
+          word-spacing: -4px;
+
+          box-shadow: 2px 2px 2px #222; /* MA: An extra I've added. */
+        }
+        </style>
+        <link rel="stylesheet" type="text/css" href="https://alhassy.github.io/org-special-block-extras/tooltipster/dist/css/tooltipster.bundle.min.css"/>
+
+        <link rel="stylesheet" type="text/css" href="https://alhassy.github.io/org-special-block-extras/tooltipster/dist/css/plugins/tooltipster/sideTip/themes/tooltipster-sideTip-punk.min.css" />
+
+        <script type="text/javascript">
+            if (typeof jQuery == 'undefined') {
+                document.write(unescape('%3Cscript src="https://code.jquery.com/jquery-1.10.0.min.js"%3E%3C/script%3E'));
+            }
+        </script>
+
+         <script type="text/javascript"            src="https://alhassy.github.io/org-special-block-extras/tooltipster/dist/js/tooltipster.bundle.min.js"></script>
+
+          <script>
+                 $(document).ready(function() {
+                     $('.tooltip').tooltipster({
+                         theme: 'tooltipster-punk',
+                         contentAsHTML: true,
+                         animation: 'grow',
+                         delay: [100,500],
+                         // trigger: 'click'
+                         trigger: 'custom',
+                         triggerOpen: {
+                             mouseenter: true
+                         },
+                         triggerClose: {
+                             originClick: true,
+                             scroll: true
+                         }
+         });
+                 });
+             </script>
+
+        <style>
+           abbr {color: red;}
+
+           .tooltip { border-bottom: 1px dotted #000;
+                      color:red;
+                      text-decoration: none;}
+        </style>
+</head>
+<body>
+<div class="reveal">
+<div class="slides">
+<section id="sec-title-slide"><h1 class="title">Dart Notes</h1><h2 class="author">Kavin Desi Valli</h2><p class="date">Created: 2020-11-19 Thu 17:56</p>
+</section>
+<section id="table-of-contents"><div id="table-of-contents">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents">
+<ul>
+<li><a href="#/slide-org777d9fa">1. Introduction</a></li>
+<li><a href="#/slide-org991086a">2. DartPad</a></li>
+<li><a href="#/slide-org0f77b98">3. Main</a></li>
+<li><a href="#/slide-orga0dcae3">4. Variables</a>
+<ul>
+<li><a href="#/slide-orgbe5f846">4.1. Types</a></li>
+<li><a href="#/slide-orga66a1a0">4.2. Usage</a>
+<ul>
+<li><a href="#/slide-orgd0d53bd">4.2.1. Output</a></li>
+</ul>
+</li>
+<li><a href="#/slide-org0e686f2">4.3. Lists</a>
+<ul>
+<li><a href="#/slide-org8c1f47b">4.3.1. Basic</a></li>
+<li><a href="#/slide-org9607b7d">4.3.2. Adding to a list</a></li>
+<li><a href="#/slide-orgf5cb169">4.3.3. Remove from list</a></li>
+<li><a href="#/slide-org6ed3df6">4.3.4. Specific Type List</a></li>
+</ul>
+</li>
+<li><a href="#/slide-org2dfdea9">4.4. Classes</a>
+<ul>
+<li><a href="#/slide-org858b86d">4.4.1. Extend Classes</a></li>
+</ul>
+</li>
+<li><a href="#/slide-org7e2c004">4.5. Important!!</a>
+<ul>
+<li><a href="#/slide-orge07320d">4.5.1. We cannot change type of variable</a></li>
+<li><a href="#/slide-org934893f">4.5.2. We can change the variable's value</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#/slide-org84f71a3">5. Functions</a>
+<ul>
+<li><a href="#/slide-org057736e">5.1. Main Function</a></li>
+<li><a href="#/slide-orgbf7eca9">5.2. Return what in function?</a></li>
+<li><a href="#/slide-org88e8aa7">5.3. Arrow functions</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+</section>
+
+<section>
+<section id="slide-org777d9fa">
+<h2 id="org777d9fa"><span class="section-number-2">1</span> Introduction</h2>
+<p>
+It is a lot like Javascript just that a syntax is a little different.
+</p>
+
+</section>
+</section>
+<section>
+<section id="slide-org991086a">
+<h2 id="org991086a"><span class="section-number-2">2</span> DartPad</h2>
+<p>
+An online pad can be found at <a href="https://dartpad.dev/">DartPad</a>
+</p>
+
+</section>
+</section>
+<section>
+<section id="slide-org0f77b98">
+<h2 id="org0f77b98"><span class="section-number-2">3</span> Main</h2>
+<div class="org-src-container">
+
+<pre  class="src src-dart"><code trim>
+<span style="color: #21bfc2;">void</span> <span style="color: #21bfc2;">main</span><span style="color: #21bfc2;">()</span> <span style="color: #21bfc2;">{</span>
+  print<span style="color: #6c6f93;">(</span><span style="color: #fab795;">"Hello World!"</span><span style="color: #6c6f93;">)</span>;
+<span style="color: #21bfc2;">}</span>
+
+</code></pre>
+</div>
+
+</section>
+</section>
+<section>
+<section id="slide-orga0dcae3">
+<h2 id="orga0dcae3"><span class="section-number-2">4</span> Variables</h2>
+<div class="outline-text-2" id="text-4">
+</div>
+</section>
+<section id="slide-orgbe5f846">
+<h3 id="orgbe5f846"><span class="section-number-3">4.1</span> Types</h3>
+<ul>
+<li>Integer : <code>int</code></li>
+<li>String : <code>String</code></li>
+<li>Boolean : <code>bool</code></li>
+<li>Dynamic : <code>dynamic</code></li>
+<li>List: <code>List</code></li>
+<li>Void: <code>void</code> (returns nothing)</li>
+
+</ul>
+
+</section>
+<section id="slide-orga66a1a0">
+<h3 id="orga66a1a0"><span class="section-number-3">4.2</span> Usage</h3>
+<div class="org-src-container">
+
+<pre  class="src src-dart"><code trim>
+<span style="color: #b877db;">dynamic</span> <span style="color: #21bfc2;">main</span><span style="color: #21bfc2;">()</span> <span style="color: #21bfc2;">{</span>
+  <span style="color: #21bfc2;">int</span> <span style="color: #e95678;">age</span> = <span style="color: #f09383;">30</span>;
+  print<span style="color: #6c6f93;">(</span>age<span style="color: #6c6f93;">)</span>;
+  <span style="color: #21bfc2;">String</span> <span style="color: #e95678;">name</span> = <span style="color: #fab795;">'chul-li'</span>;
+  print<span style="color: #6c6f93;">(</span>name<span style="color: #6c6f93;">)</span>;
+  <span style="color: #21bfc2;">bool</span> <span style="color: #e95678;">isNight</span> = <span style="color: #f09383;">false</span>;
+  print<span style="color: #6c6f93;">(</span>isNight<span style="color: #6c6f93;">)</span>;
+  <span style="color: #b877db;">dynamic</span> <span style="color: #e95678;">dyvar</span> = <span style="color: #fab795;">'chun-li'</span>;
+  dyvar = <span style="color: #f09383;">30</span>;
+  print<span style="color: #6c6f93;">(</span>dyvar<span style="color: #6c6f93;">)</span>;
+<span style="color: #21bfc2;">}</span>
+
+</code></pre>
+</div>
+
+</section>
+<section id="slide-orgd0d53bd">
+<h4 id="orgd0d53bd"><span class="section-number-4">4.2.1</span> Output</h4>
+<div class="org-src-container">
+
+<pre  class="src src-sh"><code trim>
+30
+chul-li
+<span style="color: #b877db;">false</span>
+30
+
+</code></pre>
+</div>
+
+</section>
+<section id="slide-org0e686f2">
+<h3 id="org0e686f2"><span class="section-number-3">4.3</span> Lists</h3>
+<div class="outline-text-3" id="text-4-3">
+</div>
+</section>
+<section id="slide-org8c1f47b">
+<h4 id="org8c1f47b"><span class="section-number-4">4.3.1</span> Basic</h4>
+<div class="org-src-container">
+
+<pre  class="src src-dart"><code trim>
+<span style="color: #21bfc2;">void</span> <span style="color: #21bfc2;">main</span><span style="color: #21bfc2;">()</span> <span style="color: #21bfc2;">{</span>
+  <span style="color: #21bfc2;">List</span> <span style="color: #e95678;">names</span> = <span style="color: #6c6f93;">[</span><span style="color: #fab795;">'chun-li'</span>, <span style="color: #fab795;">'yoshi'</span>, <span style="color: #fab795;">'mario'</span><span style="color: #6c6f93;">]</span>;
+  print<span style="color: #6c6f93;">(</span>names<span style="color: #6c6f93;">)</span>;
+<span style="color: #21bfc2;">}</span>
+
+</code></pre>
+</div>
+
+</section>
+<section id="slide-org9607b7d">
+<h4 id="org9607b7d"><span class="section-number-4">4.3.2</span> Adding to a list</h4>
+<div class="org-src-container">
+
+<pre  class="src src-dart"><code trim>
+names.add<span style="color: #21bfc2;">(</span><span style="color: #fab795;">'luigi'</span><span style="color: #21bfc2;">)</span>;
+
+</code></pre>
+</div>
+
+</section>
+<section id="slide-orgf5cb169">
+<h4 id="orgf5cb169"><span class="section-number-4">4.3.3</span> Remove from list</h4>
+<div class="org-src-container">
+
+<pre  class="src src-dart"><code trim>
+names.remove<span style="color: #21bfc2;">(</span><span style="color: #fab795;">'yoshi'</span><span style="color: #21bfc2;">)</span>;
+
+</code></pre>
+</div>
+
+</section>
+<section id="slide-org6ed3df6">
+<h4 id="org6ed3df6"><span class="section-number-4">4.3.4</span> Specific Type List</h4>
+<div class="org-src-container">
+
+<pre  class="src src-dart"><code trim>
+<span style="color: #21bfc2;">List</span>&lt;<span style="color: #21bfc2;">String</span>&gt; <span style="color: #e95678;">names</span> = <span style="color: #21bfc2;">[</span><span style="color: #fab795;">'hello'</span>,<span style="color: #fab795;">'world'</span><span style="color: #21bfc2;">]</span>
+
+</code></pre>
+</div>
+</section>
+<section id="slide-org2dfdea9">
+<h3 id="org2dfdea9"><span class="section-number-3">4.4</span> Classes</h3>
+<div class="org-src-container">
+
+<pre  class="src src-dart"><code trim>
+<span style="color: #21bfc2;">void</span> <span style="color: #21bfc2;">main</span><span style="color: #21bfc2;">()</span> <span style="color: #21bfc2;">{</span>
+  <span style="color: #4e5059; font-style: italic;">// Instantiating a class</span>
+  <span style="color: #21bfc2;">User</span> <span style="color: #e95678;">userOne</span> = <span style="color: #21bfc2;">User</span><span style="color: #6c6f93;">(</span><span style="color: #fab795;">'luigi'</span>, <span style="color: #f09383;">30</span><span style="color: #6c6f93;">)</span>;
+  print<span style="color: #6c6f93;">(</span>userOne.username<span style="color: #6c6f93;">)</span>;
+  userOne.login<span style="color: #6c6f93;">()</span>;
+
+  <span style="color: #21bfc2;">User</span> <span style="color: #e95678;">userTwo</span> = <span style="color: #21bfc2;">User</span><span style="color: #6c6f93;">(</span><span style="color: #fab795;">'Kavin'</span>, <span style="color: #f09383;">14</span><span style="color: #6c6f93;">)</span>;
+  print<span style="color: #6c6f93;">(</span>userTwo.username<span style="color: #6c6f93;">)</span>;
+
+  <span style="color: #21bfc2;">SuperUser</span> <span style="color: #e95678;">userThree</span> = <span style="color: #21bfc2;">SuperUser</span><span style="color: #6c6f93;">(</span><span style="color: #fab795;">'Yoshi'</span>, <span style="color: #f09383;">20</span><span style="color: #6c6f93;">)</span>;
+  print<span style="color: #6c6f93;">(</span>userThree.username<span style="color: #6c6f93;">)</span>;
+  userThree.publish<span style="color: #6c6f93;">()</span>;
+  userThree.login<span style="color: #6c6f93;">()</span>;
+
+  <span style="color: #4e5059; font-style: italic;">// </span><span style="color: #DB3340; font-weight: bold;">BUG:</span><span style="color: #4e5059; font-style: italic;"> This won't work</span>
+  userTwo.publish<span style="color: #6c6f93;">()</span>;
+<span style="color: #21bfc2;">}</span>
+
+<span style="color: #b877db;">class</span> <span style="color: #21bfc2;">User</span> <span style="color: #21bfc2;">{</span>
+  <span style="color: #21bfc2;">String</span> <span style="color: #e95678;">username</span>;
+  <span style="color: #21bfc2;">int</span> <span style="color: #e95678;">age</span>;
+
+  <span style="color: #21bfc2;">User</span><span style="color: #6c6f93;">(</span><span style="color: #21bfc2;">String</span> <span style="color: #e95678;">username</span>, <span style="color: #21bfc2;">int</span> <span style="color: #e95678;">age</span><span style="color: #6c6f93;">)</span> <span style="color: #6c6f93;">{</span>
+    <span style="color: #b877db;">this</span>.username = username;
+    <span style="color: #b877db;">this</span>.age = age;
+  <span style="color: #6c6f93;">}</span>;
+
+  <span style="color: #21bfc2;">void</span> <span style="color: #21bfc2;">login</span><span style="color: #6c6f93;">()</span> <span style="color: #6c6f93;">{</span>
+    print<span style="color: #09f7a0;">(</span><span style="color: #fab795;">"User logged in"</span><span style="color: #09f7a0;">)</span>;
+  <span style="color: #6c6f93;">}</span>
+
+<span style="color: #21bfc2;">}</span>
+
+</code></pre>
+</div>
+</section>
+<section id="slide-org858b86d">
+<h4 id="org858b86d"><span class="section-number-4">4.4.1</span> Extend Classes</h4>
+<div class="org-src-container">
+
+<pre  class="src src-dart"><code trim>
+<span style="color: #b877db;">class</span> <span style="color: #21bfc2;">SuperUser</span> <span style="color: #b877db;">extends</span> <span style="color: #21bfc2;">User</span> <span style="color: #21bfc2;">{</span>
+
+  <span style="color: #4e5059; font-style: italic;">//</span><span style="color: #F7EAC8; font-weight: bold;">INFO:</span><span style="color: #4e5059; font-style: italic;"> Constructor: Don't set the values. We inherit from User object. So use =super=</span>
+  <span style="color: #21bfc2;">SuperUser</span><span style="color: #6c6f93;">(</span><span style="color: #21bfc2;">String</span> <span style="color: #e95678;">username</span>, <span style="color: #21bfc2;">int</span> <span style="color: #e95678;">age</span><span style="color: #6c6f93;">)</span> : <span style="color: #b877db;">super</span><span style="color: #6c6f93;">(</span>username, age<span style="color: #6c6f93;">)</span>
+
+  <span style="color: #21bfc2;">void</span> <span style="color: #21bfc2;">publish</span><span style="color: #6c6f93;">()</span> <span style="color: #6c6f93;">{</span>
+    print<span style="color: #09f7a0;">(</span><span style="color: #fab795;">"published update"</span><span style="color: #09f7a0;">)</span>;
+  <span style="color: #6c6f93;">}</span>
+<span style="color: #21bfc2;">}</span>
+
+</code></pre>
+</div>
+</section>
+<section id="slide-org7e2c004">
+<h3 id="org7e2c004"><span class="section-number-3">4.5</span> Important!!</h3>
+<div class="outline-text-3" id="text-4-5">
+</div>
+</section>
+<section id="slide-orge07320d">
+<h4 id="orge07320d"><span class="section-number-4">4.5.1</span> We cannot change type of variable</h4>
+<div class="org-src-container">
+
+<pre  class="src src-dart"><code trim>
+<span style="color: #21bfc2;">void</span> <span style="color: #21bfc2;">main</span><span style="color: #21bfc2;">()</span> <span style="color: #21bfc2;">{</span>
+  <span style="color: #21bfc2;">String</span> <span style="color: #e95678;">name</span> = <span style="color: #fab795;">'chul-li'</span>;
+  name = <span style="color: #f09383;">30</span>;
+  print<span style="color: #6c6f93;">(</span>name<span style="color: #6c6f93;">)</span>;
+<span style="color: #21bfc2;">}</span>
+
+</code></pre>
+</div>
+<p>
+<code>A value of type 'int' can't be assigned to a variable of type 'String'</code>
+</p>
+
+</section>
+<section id="slide-org934893f">
+<h4 id="org934893f"><span class="section-number-4">4.5.2</span> We can change the variable's value</h4>
+<div class="org-src-container">
+
+<pre  class="src src-dart"><code trim>
+<span style="color: #21bfc2;">void</span> <span style="color: #21bfc2;">main</span><span style="color: #21bfc2;">()</span> <span style="color: #21bfc2;">{</span>
+  <span style="color: #21bfc2;">String</span> <span style="color: #e95678;">name</span> = <span style="color: #fab795;">'chul-li'</span>;
+  name = <span style="color: #fab795;">'kavin'</span>;
+  print<span style="color: #6c6f93;">(</span>name<span style="color: #6c6f93;">)</span>;
+<span style="color: #21bfc2;">}</span>
+
+</code></pre>
+</div>
+<p>
+<code>kavin</code>
+</p>
+
+</section>
+</section>
+<section>
+<section id="slide-org84f71a3">
+<h2 id="org84f71a3"><span class="section-number-2">5</span> Functions</h2>
+<div class="outline-text-2" id="text-5">
+</div>
+</section>
+<section id="slide-org057736e">
+<h3 id="org057736e"><span class="section-number-3">5.1</span> Main Function</h3>
+<p>
+Top level required function in dart
+</p>
+<div class="org-src-container">
+
+<pre  class="src src-dart"><code trim>
+<span style="color: #21bfc2;">void</span> <span style="color: #21bfc2;">main</span><span style="color: #21bfc2;">()</span> <span style="color: #21bfc2;">{</span>
+
+<span style="color: #21bfc2;">}</span>
+
+</code></pre>
+</div>
+<p>
+<code>void</code> means function is not gonna return anything.
+</p>
+
+</section>
+<section id="slide-orgbf7eca9">
+<h3 id="orgbf7eca9"><span class="section-number-3">5.2</span> Return what in function?</h3>
+<div class="org-src-container">
+
+<pre  class="src src-dart"><code trim>
+<span style="color: #21bfc2;">void</span> <span style="color: #21bfc2;">main</span><span style="color: #21bfc2;">()</span> <span style="color: #21bfc2;">{</span>
+  print<span style="color: #6c6f93;">(</span><span style="color: #fab795;">"something"</span><span style="color: #6c6f93;">)</span>;
+  <span style="color: #21bfc2;">String</span> <span style="color: #e95678;">greet</span> = greeting<span style="color: #6c6f93;">()</span>;
+  print<span style="color: #6c6f93;">(</span>greet<span style="color: #6c6f93;">)</span>;
+  <span style="color: #21bfc2;">int</span> <span style="color: #e95678;">age</span> = getAge<span style="color: #6c6f93;">()</span>;
+  print<span style="color: #6c6f93;">(</span>age<span style="color: #6c6f93;">)</span>;
+<span style="color: #21bfc2;">}</span>
+
+<span style="color: #21bfc2;">String</span> <span style="color: #21bfc2;">greeting</span><span style="color: #21bfc2;">()</span> <span style="color: #21bfc2;">{</span>
+  <span style="color: #b877db;">return</span> <span style="color: #fab795;">'hello'</span>;
+<span style="color: #21bfc2;">}</span>
+
+<span style="color: #21bfc2;">int</span> <span style="color: #21bfc2;">getAge</span><span style="color: #21bfc2;">()</span> <span style="color: #21bfc2;">{</span>
+  <span style="color: #b877db;">return</span> <span style="color: #f09383;">30</span>;
+<span style="color: #21bfc2;">}</span>
+
+</code></pre>
+</div>
+
+</section>
+<section id="slide-org88e8aa7">
+<h3 id="org88e8aa7"><span class="section-number-3">5.3</span> Arrow functions</h3>
+<div class="org-src-container">
+
+<pre  class="src src-dart"><code trim>
+<span style="color: #21bfc2;">String</span> <span style="color: #21bfc2;">greeting</span><span style="color: #21bfc2;">()</span> =&gt; <span style="color: #fab795;">'hello'</span>;
+<span style="color: #21bfc2;">int</span> <span style="color: #21bfc2;">getAge</span><span style="color: #21bfc2;">()</span> =&gt; <span style="color: #f09383;">30</span>;
+
+</code></pre>
+</div>
+</section>
+</section>
+</div>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/reveal.js/dist/reveal.js"></script>
+
+<script>
+// Full list of configuration options available here:
+// https://github.com/hakimel/reveal.js#configuration
+Reveal.initialize({
+multiplex: {
+    secret: '', // null if client
+    id: '', // id, obtained from socket.io server
+    url: '' // Location of socket.io server
+},
+
+// Optional libraries used to extend on reveal.js
+dependencies: [
+ { src: 'https://cdn.jsdelivr.net/npm/reveal.js/lib/js/classList.js', condition: function() { return !document.body.classList; } },
+ { src: 'https://cdn.jsdelivr.net/npm/reveal.js/plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+ { src: 'https://cdn.jsdelivr.net/npm/reveal.js/plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+ { src: 'https://cdn.jsdelivr.net/npm/reveal.js/plugin/zoom-js/zoom.js', async: true, condition: function() { return !!document.body.classList; } },
+ { src: 'https://cdn.jsdelivr.net/npm/reveal.js/plugin/notes/notes.js', async: true, condition: function() { return !!document.body.classList; } }]
+});
+</script>
+</body>
+</html>

@@ -1,0 +1,257 @@
+% Created 2020-11-19 Thu 17:46
+% Intended LaTeX compiler: pdflatex
+\documentclass[presentation]{beamer}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{graphicx}
+\usepackage{grffile}
+\usepackage{longtable}
+\usepackage{wrapfig}
+\usepackage{rotating}
+\usepackage[normalem]{ulem}
+\usepackage{amsmath}
+\usepackage{textcomp}
+\usepackage{amssymb}
+\usepackage{capt-of}
+\usepackage{hyperref}
+\usetheme{default}
+\author{Kavin Desi Valli}
+\date{\today}
+\title{Dart Notes}
+\hypersetup{
+ pdfauthor={Kavin Desi Valli},
+ pdftitle={Dart Notes},
+ pdfkeywords={},
+ pdfsubject={},
+ pdfcreator={Emacs 27.1 (Org mode 9.4)}, 
+ pdflang={English}}
+\begin{document}
+
+\maketitle
+\begin{frame}{Outline}
+\tableofcontents
+\end{frame}
+
+
+\begin{frame}[label={sec:orgd901e37}]{Introduction}
+It is a lot like Javascript just that a syntax is a little different.
+\end{frame}
+
+\begin{frame}[label={sec:orgaf6b74a}]{DartPad}
+An online pad can be found at \href{https://dartpad.dev/}{DartPad}
+\end{frame}
+
+\begin{frame}[label={sec:orge856a76},fragile]{Main}
+ \begin{verbatim}
+
+void main() {
+  print("Hello World!");
+}
+
+\end{verbatim}
+\end{frame}
+
+\begin{frame}[label={sec:orgc87552c},fragile]{Variables}
+ \begin{block}{Types}
+\begin{itemize}
+\item Integer : \texttt{int}
+\item String : \texttt{String}
+\item Boolean : \texttt{bool}
+\item Dynamic : \texttt{dynamic}
+\item List: \texttt{List}
+\item Void: \texttt{void} (returns nothing)
+\end{itemize}
+\end{block}
+
+\begin{block}{Usage}
+\begin{verbatim}
+
+dynamic main() {
+  int age = 30;
+  print(age);
+  String name = 'chul-li';
+  print(name);
+  bool isNight = false;
+  print(isNight);
+  dynamic dyvar = 'chun-li';
+  dyvar = 30;
+  print(dyvar);
+}
+
+\end{verbatim}
+
+\begin{block}{Output}
+\begin{verbatim}
+
+30
+chul-li
+false
+30
+
+\end{verbatim}
+\end{block}
+\end{block}
+
+\begin{block}{Lists}
+\begin{block}{Basic}
+\begin{verbatim}
+
+void main() {
+  List names = ['chun-li', 'yoshi', 'mario'];
+  print(names);
+}
+
+\end{verbatim}
+\end{block}
+
+\begin{block}{Adding to a list}
+\begin{verbatim}
+
+names.add('luigi');
+
+\end{verbatim}
+\end{block}
+
+\begin{block}{Remove from list}
+\begin{verbatim}
+
+names.remove('yoshi');
+
+\end{verbatim}
+\end{block}
+
+\begin{block}{Specific Type List}
+\begin{verbatim}
+
+List<String> names = ['hello','world']
+
+\end{verbatim}
+\end{block}
+\end{block}
+\begin{block}{Classes}
+\begin{verbatim}
+
+void main() {
+  // Instantiating a class
+  User userOne = User('luigi', 30);
+  print(userOne.username);
+  userOne.login();
+
+  User userTwo = User('Kavin', 14);
+  print(userTwo.username);
+
+  SuperUser userThree = SuperUser('Yoshi', 20);
+  print(userThree.username);
+  userThree.publish();
+  userThree.login();
+
+  // BUG: This won't work
+  userTwo.publish();
+}
+
+class User {
+  String username;
+  int age;
+
+  User(String username, int age) {
+    this.username = username;
+    this.age = age;
+  };
+
+  void login() {
+    print("User logged in");
+  }
+
+}
+
+\end{verbatim}
+\begin{block}{Extend Classes}
+\begin{verbatim}
+
+class SuperUser extends User {
+
+  //INFO: Constructor: Don't set the values. We inherit from User object. So use =super=
+  SuperUser(String username, int age) : super(username, age)
+
+  void publish() {
+    print("published update");
+  }
+}
+
+\end{verbatim}
+\end{block}
+\end{block}
+\begin{block}{Important!!}
+\begin{block}{We cannot change type of variable}
+\begin{verbatim}
+
+void main() {
+  String name = 'chul-li';
+  name = 30;
+  print(name);
+}
+
+\end{verbatim}
+\texttt{A value of type 'int' can't be assigned to a variable of type 'String'}
+\end{block}
+
+\begin{block}{We can change the variable's value}
+\begin{verbatim}
+
+void main() {
+  String name = 'chul-li';
+  name = 'kavin';
+  print(name);
+}
+
+\end{verbatim}
+\texttt{kavin}
+\end{block}
+\end{block}
+\end{frame}
+
+\begin{frame}[label={sec:orgd957af2},fragile]{Functions}
+ \begin{block}{Main Function}
+Top level required function in dart
+\begin{verbatim}
+
+void main() {
+
+}
+
+\end{verbatim}
+\texttt{void} means function is not gonna return anything.
+\end{block}
+
+\begin{block}{Return what in function?}
+\begin{verbatim}
+
+void main() {
+  print("something");
+  String greet = greeting();
+  print(greet);
+  int age = getAge();
+  print(age);
+}
+
+String greeting() {
+  return 'hello';
+}
+
+int getAge() {
+  return 30;
+}
+
+\end{verbatim}
+\end{block}
+
+\begin{block}{Arrow functions}
+\begin{verbatim}
+
+String greeting() => 'hello';
+int getAge() => 30;
+
+\end{verbatim}
+\end{block}
+\end{frame}
+\end{document}

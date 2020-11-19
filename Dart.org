@@ -1,0 +1,231 @@
+#+title: Dart Notes
+#+author: Kavin Desi Valli
+
+* Table of Contents :noexport:
+:PROPERTIES:
+:TOC:      :include all :ignore this
+:END:
+:CONTENTS:
+- [[#introduction][Introduction]]
+- [[#dartpad][DartPad]]
+- [[#main][Main]]
+- [[#variables][Variables]]
+  - [[#types][Types]]
+  - [[#usage][Usage]]
+    - [[#output][Output]]
+  - [[#lists][Lists]]
+    - [[#basic][Basic]]
+    - [[#adding-to-a-list][Adding to a list]]
+    - [[#remove-from-list][Remove from list]]
+    - [[#specific-type-list][Specific Type List]]
+  - [[#classes][Classes]]
+    - [[#extend-classes][Extend Classes]]
+  - [[#important][Important!!]]
+    - [[#we-cannot-change-type-of-variable][We cannot change type of variable]]
+    - [[#we-can-change-the-variables-value][We can change the variable's value]]
+- [[#functions][Functions]]
+  - [[#main-function][Main Function]]
+  - [[#return-what-in-function][Return what in function?]]
+  - [[#arrow-functions][Arrow functions]]
+:END:
+* Introduction
+It is a lot like Javascript just that a syntax is a little different.
+
+* DartPad
+An online pad can be found at [[https://dartpad.dev/][DartPad]]
+
+* Main
+#+begin_src dart
+
+  void main() {
+    print("Hello World!");
+  }
+
+#+end_src
+
+#+RESULTS:
+: null
+
+* Variables
+** Types
+- Integer : =int=
+- String : =String=
+- Boolean : =bool=
+- Dynamic : =dynamic=
+- List: =List=
+- Void: =void= (returns nothing)
+
+** Usage
+#+begin_src dart
+
+  dynamic main() {
+    int age = 30;
+    print(age);
+    String name = 'chul-li';
+    print(name);
+    bool isNight = false;
+    print(isNight);
+    dynamic dyvar = 'chun-li';
+    dyvar = 30;
+    print(dyvar);
+  }
+
+#+end_src
+ 
+*** Output
+#+begin_src sh
+
+  30
+  chul-li
+  false
+  30
+
+#+end_src
+ 
+** Lists
+*** Basic
+#+begin_src dart
+
+  void main() {
+    List names = ['chun-li', 'yoshi', 'mario'];
+    print(names);
+  }
+
+#+end_src
+
+*** Adding to a list
+#+begin_src dart
+
+  names.add('luigi');
+
+#+end_src
+     
+*** Remove from list
+#+begin_src dart
+
+  names.remove('yoshi');
+
+#+end_src
+ 
+*** Specific Type List
+#+begin_src dart
+
+  List<String> names = ['hello','world']
+
+#+end_src
+** Classes
+#+begin_src dart
+
+  void main() {
+    // Instantiating a class
+    User userOne = User('luigi', 30);
+    print(userOne.username);
+    userOne.login();
+
+    User userTwo = User('Kavin', 14);
+    print(userTwo.username);
+
+    SuperUser userThree = SuperUser('Yoshi', 20);
+    print(userThree.username);
+    userThree.publish();
+    userThree.login();
+
+    // BUG: This won't work
+    userTwo.publish();
+  }
+
+  class User {
+    String username;
+    int age;
+
+    User(String username, int age) {
+      this.username = username;
+      this.age = age;
+    };
+
+    void login() {
+      print("User logged in");
+    }
+
+  }
+
+#+end_src
+*** Extend Classes
+#+begin_src dart
+
+  class SuperUser extends User {
+
+    //INFO: Constructor: Don't set the values. We inherit from User object. So use =super=
+    SuperUser(String username, int age) : super(username, age)
+
+    void publish() {
+      print("published update");
+    }
+  }
+
+#+end_src
+** Important!!
+*** We cannot change type of variable
+  #+begin_src dart
+
+    void main() {
+      String name = 'chul-li';
+      name = 30;
+      print(name);
+    }
+
+  #+end_src
+  =A value of type 'int' can't be assigned to a variable of type 'String'=
+
+*** We can change the variable's value
+#+begin_src dart
+
+  void main() {
+    String name = 'chul-li';
+    name = 'kavin';
+    print(name);
+  }
+
+#+end_src
+=kavin=
+
+* Functions
+** Main Function
+Top level required function in dart
+#+begin_src dart
+
+  void main() {
+
+  }
+
+#+end_src                                                   
+=void= means function is not gonna return anything.
+
+** Return what in function?
+#+begin_src dart
+
+  void main() {
+    print("something");
+    String greet = greeting();
+    print(greet);
+    int age = getAge();
+    print(age);
+  }
+
+  String greeting() {
+    return 'hello';
+  }
+
+  int getAge() {
+    return 30;
+  }
+
+#+end_src
+
+** Arrow functions
+#+begin_src dart
+
+  String greeting() => 'hello';
+  int getAge() => 30;
+
+#+end_src
